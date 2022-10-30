@@ -31,7 +31,6 @@ export const labelsColors = [
     "#21567f",
     "#ff9f1a",
     "#6C547B",
-
     "#FBEDEB",
     "#F5D3CE",
     "#EFB3AB",

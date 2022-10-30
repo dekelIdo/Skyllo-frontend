@@ -32,9 +32,14 @@ export function BoardApp() {
 
         return () => { dispatch(updateBoard(null)) }
     }, [])
-useEffect(()=>{
-   if(board) onChangeHeaderColor(board)
-},[board.style])
+    useEffect(() => {
+        if (board) {
+            onChangeHeaderColor(board)
+            if (!board.style) {
+                board.style={}
+            }
+        }
+    }, [board?.style])
     const user = useSelector(state => state.userModule.user)
 
 
@@ -89,8 +94,8 @@ useEffect(()=>{
                 const fac = new FastAverageColor();
                 const color = await fac.getColorAsync(url)
                 board.style.backgroundColor = color.rgb;
-                console.log(' board.style.backgroundColor ', board.style.backgroundColor )
-                
+                console.log(' board.style.backgroundColor ', board.style.backgroundColor)
+
             } else if (board.style?.bgImg) {
                 const color = hexToRgb(board.style?.bgImg)
                 board.style.backgroundColor = ` rgba(${color.r},${color.g},${color.b},.45)`
@@ -123,7 +128,7 @@ useEffect(()=>{
 
     return <React.Fragment>
         {!user && <HomePageHeader />}
-        {user && <AppHeader  headerColor={headerColor} board={board} />}
+        {user && <AppHeader headerColor={headerColor} board={board} />}
         <div style={{ [backgroundStyle]: board?.style?.bgImg, objectFit: 'cover', backgroundSize: 'cover' }} className="main">
 
 
